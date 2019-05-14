@@ -9,26 +9,26 @@ ranks = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', '
 suits = ['Hearts', 'Spades', 'Diamonds', 'Clubs']
 
 def get_data() -> (pd.DataFrame, pd.Series, pd.DataFrame, pd.Series):
-    train_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/poker/poker-hand-training-true.data'
-    test_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/poker/poker-hand-testing.data'
+    train_url = 'new_train_data.csv'
+    test_url = 'new_test_data.csv'
 
-    col_names = {0:'Suit of card #1', 1:'Rank of card #1',
-                 2:'Suit of card #2', 3:'Rank of card #2',
-                 4:'Suit of card #3', 5:'Rank of card #3',
-                 6:'Suit of card #4', 7:'Rank of card #4',
-                 8:'Suit of card #5', 9:'Rank of card #5',
-                 10:'Poker Hand'}
+#     col_names = {0:'Suit of card #1', 1:'Rank of card #1',
+#                  2:'Suit of card #2', 3:'Rank of card #2',
+#                  4:'Suit of card #3', 5:'Rank of card #3',
+#                  6:'Suit of card #4', 7:'Rank of card #4',
+#                  8:'Suit of card #5', 9:'Rank of card #5',
+#                  10:'Poker Hand'}
 
     train = pd.read_csv(train_url, header=None)
-    train.rename(col_names, axis='columns', inplace=True)
+#     train.rename(col_names, axis='columns', inplace=True)
 
     test = pd.read_csv(test_url, header=None)
-    test.rename(col_names, axis='columns', inplace=True)
+#     test.rename(col_names, axis='columns', inplace=True)
 
     x_train = train.iloc[:,0:10]
     y_train = train.iloc[:,10]
-    x_test = train.iloc[:,0:10]
-    y_test = train.iloc[:,10]
+    x_test = test.iloc[:,0:10]
+    y_test = test.iloc[:,10]
     
     return x_train, y_train, x_test, y_test
 

@@ -82,7 +82,7 @@ def check_two_pairs(ranks:list) -> bool:
     return 2 in Counter(Counter(ranks).values()).values()
 
 def evaluate_hand(hand:list) -> bool:
-    r1, r2, r3, r4, r5, s1, s2, s3, s4, s5 = hand
+    r1, r2, r3, r4, r5, s1, s2, s3, s4, s5, res = hand
     suits = [s1,s2,s3,s4,s5]
     ranks = [r1,r2,r3,r4,r5]
     cards = [(s1,r1),(s2,r2),(s3,r3),(s4,r4),(s5,r5)]

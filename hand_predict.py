@@ -5,8 +5,8 @@ from collections import Counter
 
 hands = ['Nothing', 'One Pair', 'Two Pairs', 'Three of a kind', 'Straight',
         'Flush', 'Full house', 'Four of a kind', 'Straight flush', 'Royal flush', 'Invalid']
-ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-suits = ['♥', '♠', '♦', '♣']
+ranks = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
+suits = ['Hearts', 'Spades', 'Diamonds', 'Clubs']
 
 def get_data() -> (pd.DataFrame, pd.Series, pd.DataFrame, pd.Series):
     train_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/poker/poker-hand-training-true.data'

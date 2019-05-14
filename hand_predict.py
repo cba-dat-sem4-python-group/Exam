@@ -57,31 +57,31 @@ def predict(data: np.array) -> str:
     pred = new_model.predict_proba([arr])
     return hands[np.argmax(pred)]
 
-def check_flush(suits):
+def check_flush(suits:list) -> bool:
     return len(set(suits)) == 1
 
-def check_four_of_a_kind(ranks):
+def check_four_of_a_kind(ranks:list) -> bool:
     return 4 in Counter(ranks).values()
 
-def check_full_house(ranks):
+def check_full_house(ranks:list) -> bool:
     count = Counter(ranks).values()
     return 3 in count and 2 in count
 
-def check_pair(ranks):
+def check_pair(ranks:list) -> bool:
     return 2 in Counter(ranks).values()
 
-def check_straight(ranks):
+def check_straight(ranks:list) -> bool:
     sorted_ranks = sorted(ranks, key=int)
     consecutive = sorted_ranks[0]==sorted_ranks[1]-1==sorted_ranks[2]-2==sorted_ranks[3]-3==sorted_ranks[4]-4
     return consecutive or set(ranks) == {1,10,11,12,13}
 
-def check_three_of_a_kind(ranks):
+def check_three_of_a_kind(ranks:list) -> bool:
     return 3 in Counter(ranks).values()
 
-def check_two_pairs(ranks):
+def check_two_pairs(ranks:list) -> bool:
     return 2 in Counter(Counter(ranks).values()).values()
 
-def evaluate_hand(hand):
+def evaluate_hand(hand:list) -> bool:
     r1, r2, r3, r4, r5, s1, s2, s3, s4, s5 = hand
     suits = [s1,s2,s3,s4,s5]
     ranks = [r1,r2,r3,r4,r5]
@@ -110,7 +110,7 @@ def evaluate_hand(hand):
     else:
         return 0
 
-def print_hand(hand):
+def print_hand(hand:list):
     card1 = '{:{}{}{}}'.format(ranks[hand[1]-1],' ','>',2)+suits[hand[0]-1]
     card2 = '{:{}{}{}}'.format(ranks[hand[3]-1],' ','>',2)+suits[hand[2]-1]
     card3 = '{:{}{}{}}'.format(ranks[hand[5]-1],' ','>',2)+suits[hand[4]-1]

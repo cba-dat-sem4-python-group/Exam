@@ -58,16 +58,33 @@ def full_house():
     return res + [6]
 
 def flush():
-    suit = random.choice(range(1,5))
+    
+
+    rank_list = list(range(1,14))
     ranks = []
-    for _ in range(5):
-        while True:
-            randomCard = random.choice(range(1,14))
-            if randomCard not in ranks:
-                ranks.append(randomCard)
-                break
-    random.shuffle(ranks)
-    return ranks+[suit]*5+[5]
+
+    one = random.choice(rank_list)
+    ranks.append(one)
+    rank_list.remove(one)
+
+    two = (one + 5 + random.choice(range(4)) + 12) % 13 + 1 #range(4) 0->3 ||  ( n+5+(rand 0 -> 3) + len-1 ) % len+1
+    ranks.append(two)
+    rank_list.remove(two)
+
+
+    for x in range(3):
+        res = random.choice(rank_list)
+        ranks.append(res)
+        rank_list.remove(res)
+    
+ 
+    ########################
+    
+    suit = random.choice(range(1,5))
+    
+    suits = [suit for _ in range(5)]
+    
+    return ranks + suits + [5]
 
 def straight():
     low_card = random.choice(range(1,11))

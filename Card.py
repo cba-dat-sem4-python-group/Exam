@@ -8,6 +8,7 @@ class Card:
         self.contour = []    #card contour
         self.width = 0       #contour max width?
         self.height = 0      #contour max height?
+        self.size = 0
         self.center = []
         self.coords = []     #the rects 4 corners
         self.warped = []     #warped img of the card
@@ -128,7 +129,7 @@ class Card:
 
         # Make it black & white and more crisp
         thresh = cv2.threshold(corner_big_gray, 180, 255, cv2.THRESH_BINARY_INV)[1]
-        thresh = cv2.adaptiveThreshold(corner_big_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 115, 1)
+        #thresh = cv2.adaptiveThreshold(corner_big_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 501, 1)
         
         self.warped_thresh = thresh
         
@@ -193,4 +194,31 @@ class Card:
         self.suit = suits.index(min(best_match_dict, key=best_match_dict.get)) + 1
         
         
-    def validate(self): return self.num is not None and self.suit is not None
+    def validate(self):
+        
+        def distance(p1, p2): return math.sqrt( ((p1[0]-p2[0])**2)+((p1[1]-p2[1])**2) )
+
+        a = distance(self.coords[0], self.coords[1])
+        b = distance(self.coords[0], self.coords[3])
+        
+        dims = max(a, b) / min(a, b)
+        is_reasonable_dims = dims < 4
+        
+        print(dims, self.num)
+        
+        return self.num is not None and self.suit is not None and is_reasonable_dims
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

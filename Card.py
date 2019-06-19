@@ -23,6 +23,9 @@ class Card:
     def draw_warped(self):
         cv2.imshow(self.num+self.suit+str(self.height)+str(self.width), self.warped)
         
+    def draw_warped_thresh(self):
+        cv2.imshow(self.num+self.suit+str(self.height)+str(self.width)+"warped_thresh", self.warped)
+        
     def draw_card_outlines(self, img):
         cv2.polylines(img, np.array([self.coords]), True, (0,255,255), 2)
         
@@ -204,7 +207,7 @@ class Card:
         dims = max(a, b) / min(a, b)
         is_reasonable_dims = dims < 4
         
-        print(dims, self.num)
+        #print(dims, self.num)
         
         return self.num is not None and self.suit is not None and is_reasonable_dims
     

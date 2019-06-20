@@ -2,9 +2,11 @@ import numpy as np
 import tensorflow as tf
 # import Card
 
+model = tf.keras.models.load_model("models/final_model.h5")
+
 def getHand(found_cards):
     text = str(len(found_cards)) + "/5 cards found"
-    model = tf.keras.models.load_model("models/final_model.h5")
+    
 
     if len(found_cards) >= 5:
         nums = [card.num for card in found_cards[:5]]

@@ -131,7 +131,7 @@ class Card:
         
 
         # Make it black & white and more crisp
-        thresh = cv2.threshold(corner_big_gray, 180, 255, cv2.THRESH_BINARY_INV)[1]
+        thresh = cv2.threshold(corner_big_gray, 140, 255, cv2.THRESH_BINARY_INV)[1]
         #thresh = cv2.adaptiveThreshold(corner_big_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 501, 1)
         
         self.warped_thresh = thresh
@@ -202,12 +202,16 @@ class Card:
         def distance(p1, p2): return math.sqrt( ((p1[0]-p2[0])**2)+((p1[1]-p2[1])**2) )
 
         a = distance(self.coords[0], self.coords[1])
-        b = distance(self.coords[0], self.coords[3])
+        b = distance(self.coords[2], self.coords[3])
         
-        dims = max(a, b) / min(a, b)
-        is_reasonable_dims = dims < 4
+        c = distance(self.coords[1], self.coords[2])
+        d = distance(self.coords[0], self.coords[3])
         
-        #print(dims, self.num)
+        dim1 = max(a, b) / min(a, b)
+        dim2 = max(c, d) / min(c, d)
+        is_reasonable_dims = dim1 < 2 and dim2 < 2 
+        
+        print(dim1, dim2, self.num)
         
         return self.num is not None and self.suit is not None and is_reasonable_dims
     
